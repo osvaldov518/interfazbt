@@ -3,17 +3,21 @@ const router = Router();
 const {Client} = require('pg');
 
 const client = new Client({
-    host: 'ec2-52-23-131-232.compute-1.amazonaws.com',
+    host: 'ec2-34-231-42-166.compute-1.amazonaws.com',
     port: 5432,
-    user: 'czdijimqhtljyo',
-    password: 'f7ce97116aeefc9f0bad4bab31297ab85a321c0d07b0b3b5ebcf9802a824ddfd',
-    database: 'dc43cdtubahcag',
+    user: 'wcsxbiyhvejnji',
+    password: 'd59cee8a6c92d4ad75d1666a01cddc65883e8d8daaf42b8e80b9d5afa714c14b',
+    database: 'dv03fm55hlil0',
     ssl: {
         rejectUnauthorized: false
     }
 });
 
 client.connect()
+
+router.get('/', async(req, res) => {
+    res.send('<h1>OV.AM.CC.</h1>')
+});
 
 router.get('/api', async (req, res) => {
     const response = await client.query('select * from pasos_diarios')
@@ -23,7 +27,7 @@ router.get('/api', async (req, res) => {
 router.post('/api', async (req, res) => {
     const { tipopaso } = req.body;
     const response = await client.query('INSERT INTO pasos_diarios(cant_pasos) values ($1)', [tipopaso]).catch(err => console.log(err))
-    res.json('Registro guardado')
+    res.json('Registro guardado : '+response)
 });
 
 module.exports = router;
