@@ -25,7 +25,7 @@ router.get('/api', async (req, res) => {
 });
 
 router.post('/api', async (req, res) => {
-    const { tipopaso } = req.body;
+    const tipopaso = req.body.tipopaso;
     const qry = 'INSERT INTO pasos_diarios(cant_pasos) VALUES (' + tipopaso + ')';
     // const response = await client.query('INSERT INTO pasos_diarios(cant_pasos) values ($1)', [tipopaso]);
     console.log("body: %j", req.body);
