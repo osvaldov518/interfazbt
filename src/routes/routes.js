@@ -20,14 +20,26 @@ router.get('/', async(req, res) => {
 });
 
 router.get('/api', async (req, res) => {
-    const response = await client.query('select * from pasos_diarios')
+    const response = await client.query('select public.get_semanaactual()')
     res.json(response.rows)
 });
 
 router.post('/api', async (req, res) => {
     const { tipopaso } = req.body;
-    const response = await client.query('INSERT INTO pasos_diarios(cant_pasos) values ($1)', [tipopaso]);
+    const response = await client.query('select public.inserta_pasoindividual($1)', [tipopaso]);
     res.json('Registro guardado.');
+});
+
+router.get('/recorridodiario', async (req, res) => {
+    const qry = "select sum(cantidad_pasos1+cantidad_pasos4) total from pasos_diarios pd where id_diario = public.get_idtiempo_actual()";
+    const response = await client.query(qry);
+    res.json(response.rows)
+});
+
+router.get('/recorridosemanal', async (req, res) => {
+    const qry = "select sum(cantidad_pasos1+cantidad_pasos4) total from pasos_diarios pd where id_diario = public.get_idtiempo_actual()";
+    const response = await client.query(qry);
+    res.json(response.rows)
 });
 
 module.exports = router;
