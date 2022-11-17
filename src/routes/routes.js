@@ -20,7 +20,7 @@ router.get('/', async(req, res) => {
 });
 
 router.get('/api', async (req, res) => {
-    const response = await client.query('select public.get_semanaactual()')
+    const response = await client.query('select 000 as API')
     res.json(response.rows)
 });
 
@@ -31,12 +31,6 @@ router.post('/api', async (req, res) => {
 });
 
 router.get('/recorridodiario', async (req, res) => {
-    const qry = "select sum(cantidad_pasos1+cantidad_pasos4) total from pasos_diarios pd where id_diario = public.get_idtiempo_actual()";
-    const response = await client.query(qry);
-    res.json(response.rows)
-});
-
-router.get('/recorridosemanal', async (req, res) => {
     const qry = "select sum(cantidad_pasos1+cantidad_pasos4) total from pasos_diarios pd where id_diario = public.get_idtiempo_actual()";
     const response = await client.query(qry);
     res.json(response.rows)
