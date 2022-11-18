@@ -30,8 +30,8 @@ router.post('/api', async (req, res) => {
     res.json('Registro guardado.');
 });
 
-router.get('/recorridodiario', async (req, res) => {
-    const qry = "select sum(cantidad_pasos1+cantidad_pasos4) total from pasos_diarios pd where id_diario = public.get_idtiempo_actual()";
+router.get('/apidashboard', async (req, res) => {
+    const qry = "SELECT * FROM public.get_dashboard()";
     const response = await client.query(qry);
     res.json(response.rows)
 });
