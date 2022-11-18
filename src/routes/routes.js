@@ -31,7 +31,7 @@ router.post('/api', async (req, res) => {
 });
 
 router.get('/apidashboard', async (req, res) => {
-    const qry = "SELECT * FROM public.get_dashboard()";
+    const qry = "SELECT * FROM public.get_dashboard()"; 
     const response = await client.query(qry);
     res.json(response.rows)
 });
