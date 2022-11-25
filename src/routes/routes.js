@@ -30,6 +30,12 @@ router.post('/api', async (req, res) => {
     res.json('Registro guardado.');
 });
 
+router.post('/apiUbi', async (req, res) => {
+    const { latitud, longitud } = req.body;
+    const response = await client.query('select public.actualiza_ubicacion($1, $2)', [latitud, longitud]);
+    res.json('Ubicacion Actualizada');
+});
+
 router.get('/apidashboard', async (req, res) => {
     const qry = "SELECT * FROM public.get_dashboard()"; 
     const response = await client.query(qry);
